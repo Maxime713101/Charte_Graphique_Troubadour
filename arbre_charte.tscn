@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dycy2wdnpnkfu"]
+
+[ext_resource type="PackedScene" uid="uid://d11f20dsy7pfh" path="res://arbre_toufu.fbx" id="1_brp4m"]
+[ext_resource type="Material" uid="uid://caq5wpia3mwlj" path="res://Feuille.tres" id="2_833vm"]
+
+[node name="ArbreCharte" instance=ExtResource("1_brp4m")]
+
+[node name="Cylinder" parent="RootNode" index="0"]
+gi_mode = 0
+surface_material_override/0 = ExtResource("2_833vm")

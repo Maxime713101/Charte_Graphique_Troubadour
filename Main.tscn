@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1wq3b2bqcb4x"]
+
+[ext_resource type="PackedScene" uid="uid://dycy2wdnpnkfu" path="res://arbre_charte.tscn" id="1_q32mu"]
+[ext_resource type="Material" uid="uid://idv5ne7hkw2t" path="res://Eau.tres" id="2_apcuk"]
+
+[sub_resource type="Environment" id="Environment_r81no"]
+background_mode = 1
+background_color = Color(0.101961, 0.498039, 0.768627, 1)
+reflected_light_source = 2
+ssr_max_steps = 512
+ssr_fade_in = 0.289781
+ssao_radius = 45.25
+ssao_intensity = 16.0
+ssao_ao_channel_affect = 1.0
+ssil_radius = 5.3
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+fog_light_color = Color(0.686275, 0.745098, 0.678431, 1)
+fog_density = 0.006
+fog_height = 3.3
+fog_height_density = 3.5188
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2ag0v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pbasu"]
+size = Vector3(60, 0.2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etnga"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lkbla"]
+size = Vector2(15, 10)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_413qw"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_p136k"]
+size = Vector3(8, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7v3kq"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g40ah"]
+size = Vector3(2, 5, 8)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r81no")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.149535, 0.831116, -0.535617, -0.00736871, 0.54263, 0.83994, 0.988729, -0.121654, 0.0872664, -77.4356, 32.571, 0)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.888321, 0.459223, 0, -0.459223, 0.888321, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0.0801578, 9.89289, 12.1683)
+attributes = SubResource("CameraAttributesPractical_2ag0v")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, -1.0939, -0.442851, 0.36463)
+mesh = SubResource("BoxMesh_pbasu")
+surface_material_override/0 = SubResource("StandardMaterial3D_etnga")
+
+[node name="Object" type="Node" parent="."]
+
+[node name="ArbreCharte" parent="Object" instance=ExtResource("1_q32mu")]
+transform = Transform3D(0.997166, 0, 0.0752392, 0, 1, 0, -0.0752392, 0, 0.997166, 10.6986, 0, -9.02064)
+
+[node name="Eau" type="MeshInstance3D" parent="Object"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4883, 4.78891, -5.50908)
+material_override = ExtResource("2_apcuk")
+mesh = SubResource("PlaneMesh_lkbla")
+
+[node name="carré" type="MeshInstance3D" parent="Object"]
+transform = Transform3D(0.862796, 0, -0.505552, 0, 1, 0, 0.505552, 0, 0.862796, -22.0082, 4.27848, -5.80393)
+mesh = SubResource("CapsuleMesh_413qw")
+
+[node name="carré3" type="MeshInstance3D" parent="Object"]
+transform = Transform3D(0.989706, 0, -0.14313, 0, 1, 0, 0.14313, 0, 0.989706, -17.9851, 4.63675, -10.0265)
+mesh = SubResource("BoxMesh_p136k")
+skeleton = NodePath("../carré2")
+
+[node name="carré2" type="MeshInstance3D" parent="Object"]
+transform = Transform3D(0.847623, 0, 0.5306, 0, 1, 0, -0.5306, 0, 0.847623, -21.265, 4.19867, -1.59599)
+mesh = SubResource("BoxMesh_7v3kq")
+
+[node name="carré2" type="MeshInstance3D" parent="Object/carré2"]
+transform = Transform3D(0.758721, 0.308407, 0.573784, -0.522826, 0.81373, 0.253961, -0.388582, -0.492674, 0.778638, 14.6956, 0.645319, -3.5136)
+mesh = SubResource("BoxMesh_7v3kq")
+
+[node name="carré2" type="MeshInstance3D" parent="Object/carré2/carré2"]
+transform = Transform3D(-0.594269, 0.544001, 0.592374, -0.770746, -0.595631, -0.226218, 0.229774, -0.591002, 0.773253, -1.12627, -3.08444, 4.17182)
+mesh = SubResource("BoxMesh_7v3kq")
+
+[node name="carré2" type="MeshInstance3D" parent="Object/carré2/carré2/carré2"]
+transform = Transform3D(-0.916894, 0.167546, 0.362263, -0.372575, -0.0337399, -0.927389, -0.143159, -0.985285, 0.0933591, 4.24321, -1.57397, 1.12948)
+mesh = SubResource("BoxMesh_7v3kq")
+
+[node name="carré2" type="MeshInstance3D" parent="Object/carré2/carré2/carré2/carré2"]
+transform = Transform3D(-0.135891, 0.99063, -0.0134905, 0.867383, 0.125543, 0.481547, 0.47873, 0.0537362, -0.876317, -3.07544, 3.02329, -0.0660732)
+mesh = SubResource("BoxMesh_7v3kq")
+
+[node name="carré2" type="MeshInstance3D" parent="Object/carré2/carré2/carré2/carré2/carré2"]
+transform = Transform3D(-0.584822, 0.493744, -0.643584, 0.677131, 0.734011, -0.0521867, 0.446631, -0.466309, -0.763596, 4.43114, 0.264357, 3.98571)
+mesh = SubResource("BoxMesh_g40ah")
