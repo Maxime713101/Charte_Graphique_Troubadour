@@ -77,7 +77,7 @@ void fragment(){
 	vec4 alpha = texture(SCREEN_TEXTURE, SCREEN_UV + displacement);
 	
 	
-	
+	//application de couleur, normal, specular et rougness 
 	ALBEDO = mix(alpha.rgb, col.rgb, color.a); //Application des couleurs sur le shader *(rajouter vec3(fin) +* au début pour ajouter l'effet de remoue dans l'eau
 	NORMAL_MAP = texture(normalmap, uv_movement).rgb;
 	SPECULAR = 1.0;
