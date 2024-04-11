@@ -7,10 +7,10 @@
 render_priority = 0
 shader = ExtResource("1_057me")
 shader_parameter/leavesColor = Color(0.407843, 0.529412, 0.0980392, 1)
-shader_parameter/alphaThreshold = 0.515
-shader_parameter/offsetScale = 0.015
-shader_parameter/fresnelStrength = 0.0280001
-shader_parameter/fresnelBlend = 0.181
+shader_parameter/alphaThreshold = 0.1
+shader_parameter/offsetScale = 0.01
+shader_parameter/fresnelStrength = 1.377
+shader_parameter/fresnelBlend = 0.297
 shader_parameter/fresnelColor = Color(0.58, 0.65, 0.33, 1)
 shader_parameter/deactiveGlobalVariation = false
 shader_parameter/clampTop = 0.84
